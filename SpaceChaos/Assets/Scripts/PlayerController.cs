@@ -61,9 +61,36 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = Vector2.ClampMagnitude(rb2d.velocity, maxSpeed);
     }
 
+    private void KeepPlayerOnScreen()
+    {
+        Vector3 newPosition = transform.position;
+        Vector3 viewportPosition = mainCamera.WorldToViewportPoint(newPosition);
+
+        if (viewportPosition.x > 1f)
+        {
+            newPosition.x = -newPosition.x + 0.1f;
+        }
+        else if (viewportPosition.x < 0f)
+        {
+            newPosition.x = -newPosition.x - 0.1f;
+        }
+
+        if (viewportPosition.y > 1f)
+        {
+            newPosition.y = -newPosition.y + 0.1f;
+        }
+        else if (viewportPosition.y < 0f)
+        {
+            newPosition.y = -newPosition.y - 0.1f;
+        }
+
+        transform.position = newPosition; // Updating the transform of spaceship
+    }
+
     // Update is called once per frame
     void Update()
     {
         ProcessInput();
+        KeepPlayerOnScreen();
     }
 }
