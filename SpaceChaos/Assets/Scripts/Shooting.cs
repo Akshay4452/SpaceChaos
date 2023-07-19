@@ -4,15 +4,33 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private Transform firePoint;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private float bulletForce = 20f;
+
+    private float destroyTime = 5f;
+
+    private void Update()
     {
-        
+        if (Input.GetButtonDown("Fire1"))
+        {
+            if (GetComponent<PlayerHealthController>().IsAlive)
+            {
+                // Shoot the bullets only if the player is alive
+                ShootBullet();
+            }
+            else
+            {
+                Debug.Log("Can't Fire, Player is Dead");
+            }
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void ShootBullet()
     {
-        
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);
+        Destroy(bullet, destroyTime);
     }
 }
