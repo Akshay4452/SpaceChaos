@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Asteroid : MonoBehaviour
 {
-    [SerializeField] private GameObject hitEffect;
-    //[SerializeField] private GameObject explosionEffect;
+    [SerializeField] private Animator hitEffect;
+    [SerializeField] private Animator explosionEffect;
 
     private int asteroidHealth;
 
@@ -28,8 +28,15 @@ public class Asteroid : MonoBehaviour
         asteroidHealth--;
         if (asteroidHealth < 0)
         {
+            GameObject effect = Instantiate(explosionEffect.gameObject, transform.position, Quaternion.identity);
             Destroy(gameObject);
-        } 
+            Destroy(effect, 1f);
+        }
+        else
+        {
+            GameObject effect = Instantiate(hitEffect.gameObject, this.transform);
+            Destroy(effect, 0.5f);
+        }
     }
 
     private void OnBecameInvisible()
