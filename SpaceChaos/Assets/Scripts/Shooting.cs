@@ -28,6 +28,7 @@ public class Shooting : MonoBehaviour
 
     private void ShootBullet()
     {
+        AudioManager.Instance.PlaySFX("Shoot");  // Play the bullet shooting sound
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
         rb.AddForce(firePoint.right * bulletForce, ForceMode2D.Impulse);

@@ -28,12 +28,14 @@ public class Asteroid : MonoBehaviour
         asteroidHealth--;
         if (asteroidHealth < 0)
         {
+            AudioManager.Instance.PlaySFX("Explosion");
             GameObject effect = Instantiate(explosionEffect.gameObject, transform.position, Quaternion.identity);
             Destroy(gameObject);
             Destroy(effect, 1f);
         }
         else
         {
+            AudioManager.Instance.PlaySFX("Hit");
             GameObject effect = Instantiate(hitEffect.gameObject, this.transform);
             Destroy(effect, 0.5f);
         }

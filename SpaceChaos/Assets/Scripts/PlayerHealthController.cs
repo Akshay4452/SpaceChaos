@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerHealthController : MonoBehaviour
 {
+    [SerializeField] private Animator playerExplosionEffect;
+
     private int health;
     private bool isAlive;
     private Rigidbody2D rb;
@@ -24,10 +26,13 @@ public class PlayerHealthController : MonoBehaviour
         }
         else
         {
+            AudioManager.Instance.musicSource.Stop(); // Stop the background music after player is dead
+            AudioManager.Instance.PlaySFX("Explosion"); // Play the explosion sound effect
             isAlive = false;
-            Debug.Log("Player Died");
             rb.simulated = false;
-            Destroy(gameObject, 2f);
+            GameObject effect = Instantiate(playerExplosionEffect.gameObject, transform.position, Quaternion.identity);
+            Destroy(effect, 2f);
+            Destroy(gameObject, 0.5f);
         }
     }
 
