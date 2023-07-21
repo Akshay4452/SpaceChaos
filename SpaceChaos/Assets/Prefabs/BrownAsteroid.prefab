@@ -138,3 +138,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitEffect: {fileID: 4675434312260405636, guid: ddaf9c77a77209846826feab8bd2d450, type: 3}
   explosionEffect: {fileID: 2744398477053799053, guid: d4484a025cdc0224faf6e9f91309fb8a, type: 3}
+  scoreHandler: {fileID: 5235313388892041190, guid: bfb1ec29b191e8e42936489e4eb48f38, type: 3}
