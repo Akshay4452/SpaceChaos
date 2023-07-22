@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealthController : MonoBehaviour
 {
     [SerializeField] private Animator playerExplosionEffect;
 
-    private int health;
+    [SerializeField] private int health;
     private bool isAlive;
     private Rigidbody2D rb;
     void Start()
     {
-        health = 3;
         isAlive = true;
         rb = GetComponent<Rigidbody2D>();   
     }
@@ -20,11 +20,7 @@ public class PlayerHealthController : MonoBehaviour
     {
         // Take damage and reduce player health
         health--;
-        if (health > 0)
-        {
-            Debug.Log("Current Player health: " + health);
-        }
-        else
+        if (health == 0)
         {
             AudioManager.Instance.musicSource.Stop(); // Stop the background music after player is dead
             AudioManager.Instance.PlaySFX("Explosion"); // Play the explosion sound effect
@@ -32,8 +28,15 @@ public class PlayerHealthController : MonoBehaviour
             rb.simulated = false;
             GameObject effect = Instantiate(playerExplosionEffect.gameObject, transform.position, Quaternion.identity);
             Destroy(effect, 2f);
-            Destroy(gameObject, 0.5f);
+            AudioManager.Instance.PlaySFX("GameOver");
+            AudioManager.Instance.SetMusicStatus(false);
+            Invoke("GameOver", 2f);
         }
+    }
+
+    private void GameOver()
+    {
+        SceneManager.LoadScene("GameOver");
     }
 
     // Return the Player Alive Status

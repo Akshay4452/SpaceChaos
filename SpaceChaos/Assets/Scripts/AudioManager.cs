@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour
     public Sounds[] musicSounds, sfxSounds;
     public AudioSource musicSource, sfxSource;
 
+    private bool isMusicPlaying;
+
     private void Awake()
     {
         if(instance == null)
@@ -24,6 +26,8 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public bool IsMusicPlaying { get { return isMusicPlaying; } }
 
     private void Start()
     {
@@ -41,6 +45,7 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = s.clip;
             musicSource.Play();
+            isMusicPlaying = true;
         }
     }
 
@@ -55,6 +60,11 @@ public class AudioManager : MonoBehaviour
         {
             sfxSource.PlayOneShot(s.clip);
         }
+    }
+
+    public void SetMusicStatus(bool status)
+    {
+        isMusicPlaying = status;
     }
 
     public void ToggleMusic()

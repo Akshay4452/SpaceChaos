@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreHandler : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ScoreHandler : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    
     [SerializeField] private TMP_Text scoreText;
     private int score;
     
@@ -28,6 +29,7 @@ public class ScoreHandler : MonoBehaviour
     void Start()
     {
         score = 0; // score initialization
+        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
     }
 
     public void UpdateScore(int value)
@@ -37,4 +39,17 @@ public class ScoreHandler : MonoBehaviour
     }
 
     public int GetScore { get { return score; } }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().name == "GameScene")
+        {
+            if (scoreText == null)
+            {
+                scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+                score = 0;
+                scoreText.text = score.ToString();  // Make the score to 0 again
+            }
+        }  
+    }
 }
