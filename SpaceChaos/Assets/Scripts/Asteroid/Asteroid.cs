@@ -7,7 +7,7 @@ public class Asteroid : MonoBehaviour
 {
     [SerializeField] private Animator hitEffect;
     [SerializeField] private Animator explosionEffect;
-    [SerializeField] private ScoreHandler scoreHandler;
+    // [SerializeField] private ScoreHandler scoreHandler;
 
     private int hitScore;
     private int explosionScore;

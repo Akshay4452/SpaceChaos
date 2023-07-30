@@ -5,7 +5,7 @@ public class LobbyController : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(2);
     }
 
     public void QuitGame()
@@ -15,7 +15,7 @@ public class LobbyController : MonoBehaviour
 
     public void GoToInstructionPage()
     {
-        SceneManager.LoadScene("InstructionScene");
+        SceneManager.LoadScene(1);
     }
 
     public void BackToMainMenu()
@@ -24,7 +24,7 @@ public class LobbyController : MonoBehaviour
         {
             AudioManager.Instance.PlayMusic("Theme");
         }
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(0);
     }
 
     public void RestartGame()
@@ -33,6 +33,6 @@ public class LobbyController : MonoBehaviour
         {
             AudioManager.Instance.PlayMusic("Theme");
         }
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(2);
     }
 }

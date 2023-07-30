@@ -14,22 +14,20 @@ public class ScoreHandler : MonoBehaviour
         if(instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
-    
+
     [SerializeField] private TMP_Text scoreText;
     private int score;
-    
-    // Start is called before the first frame update
+
     void Start()
     {
-        score = 0; // score initialization
-        scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
+        score = 0;
     }
 
     public void UpdateScore(int value)
@@ -39,17 +37,4 @@ public class ScoreHandler : MonoBehaviour
     }
 
     public int GetScore { get { return score; } }
-
-    private void Update()
-    {
-        if(SceneManager.GetActiveScene().name == "GameScene")
-        {
-            if (scoreText == null)
-            {
-                scoreText = GameObject.Find("ScoreText").GetComponent<TMP_Text>();
-                score = 0;
-                scoreText.text = score.ToString();  // Make the score to 0 again
-            }
-        }  
-    }
 }

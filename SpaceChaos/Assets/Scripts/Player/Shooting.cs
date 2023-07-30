@@ -8,7 +8,7 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private float bulletForce = 20f;
 
-    private float destroyTime = 2f;
+    private float destroyTime = 1.5f;
 
     private void Update()
     {

@@ -30,13 +30,13 @@ public class PlayerHealthController : MonoBehaviour
             Destroy(effect, 2f);
             AudioManager.Instance.PlaySFX("GameOver");
             AudioManager.Instance.SetMusicStatus(false);
-            Invoke("GameOver", 2f);
+            Invoke(nameof(GameOver), 2f);
         }
     }
 
     private void GameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        SceneManager.LoadScene(3);
     }
 
     // Return the Player Alive Status
